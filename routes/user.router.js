@@ -4,7 +4,7 @@ const express = require('express');
 const {
   
   allTransferOfUser,
-  createUser,
+  createUser, 
   loginUser
   
 } = require('../controllers/user.controller');
