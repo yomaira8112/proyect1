@@ -1,44 +1,63 @@
+const { User } = require("../models/user.model");
 
+const bcrypt = require("bcryptjs");
 
+const catchAsync = (fn) => {
+  return (req, res, next) => {
+    fn(req, res, next).catch(next);
+  };
+};
+const createUser = catchAsync(async (req, res) => {
+  const { name, password } = req.body;
+  const accountNumber = Math.floor(Math.random() * 999999);
+  const salt = await bcrypt.genSalt(12);
+  const hashPassword = await bcrypt.hash(password, salt);
 
-const { User } = require('../models/user.model');
-const{validationResult}=require('express-validator');
+  const newUser = await User.create({
+    name,
+    accountNumber,
+    password: hashPassword,
+  });
 
-//const {accountNumber}=require('express-validator')
+  newUser.password = undefined;
 
-const createUser = async (req, res) => {
+  res.status(201).json({
+    newUser,
+  });
+});
+
+const loginUser = async (req, res) => {
   try {
-    const {name, password, amount} = req.body; 
-    let accountNumber =Math.floor(Math.random()*999999)
-    const newUser = await User.create({ name, accountNumber,password,amount}); 
-   
+    const { password, accountNumber } = req.body;
 
-   
-res.status(201).json({
-      newUser });
+    const user = await User.findOne({ where: { password, accountNumber } });
+
+    res.status(201).json({
+      user,
+    });
   } catch (error) {
     console.log(error);
   }
 };
 
-const loginUser=async(req,res)=>{
-    try {
-        const {name, password, amount} = req.body; 
-        
-        const user  = await User.create({ name,password,amount}); 
-       
-    
-       
-    res.status(201).json({
-       user,    });
-    }catch (error) {
-        console.log(error);
-     }
-    };
+const allTransferOfUser=async(req,res)=>{
+  try {
+    const { id } = req.params;
+    const user = await User.findOne({ where: { id } });
+
+    res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
 
 module.exports = {
-  
   createUser,
-  loginUser
-  
+  loginUser,
+  allTransferOfUser
 };

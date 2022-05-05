@@ -14,7 +14,7 @@ const User = db.define("user", {
   },
   accountNumber: {
     type: DataTypes.INTEGER,
- allowNull: false,
+    allowNull: false,
   },
   status: {
     type: DataTypes.STRING,
@@ -27,6 +27,7 @@ const User = db.define("user", {
   amount: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    defaultValue: 1000
   }
 });
 

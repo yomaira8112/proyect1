@@ -1,9 +1,9 @@
 const express = require('express');
-const{body}=require('express-validator')
+
 
 const {
   
-  
+  allTransferOfUser,
   createUser,
   loginUser
   
@@ -12,13 +12,15 @@ const {
 
 const router = express.Router();
 
-// const { validateUser } = require('../midelwares/user.midelware');
 
-router.post('/signup', createUser,
 
-body('accountNumber').notEmpty().isLength({ min: 6 }))
+router.post('/signup', createUser)
+
+
 
 router.post('/login',loginUser)
+
+router.get('/:id/history',allTransferOfUser)
 
 
 module.exports = { usersRouter: router };

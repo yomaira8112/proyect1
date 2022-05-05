@@ -2,19 +2,20 @@
 
 const {Transfer}=require('../models/transfer.model')
 
+
 const getAnAmount = async (req, res) => {
     try {
-      const {name, accountNumber ,password, amount} = req.body; 
+      const {id} =req.params; 
       
-      const newTransfer = await Transfer.create({ name, accountNumber,password,amount}); 
+      const newTransfer = await Transfer.findAll({ where:{ senderUserid:id}}); 
      
   
      
-  res.status(201).json({
-        newUser });
+      res.status(201).json({
+        newTransfer });
     } catch (error) {
       console.log(error);
     }
-  };
+};
 
   module.exports={getAnAmount}

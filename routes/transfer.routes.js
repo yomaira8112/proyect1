@@ -1,6 +1,6 @@
 
  const express = require('express');
- const{body}=require('express-validator')
+ 
  
  const { getAnAmount} = require('../controllers/tranfers.controller');
  
