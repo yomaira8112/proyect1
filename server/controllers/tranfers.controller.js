@@ -33,13 +33,17 @@ const transferences = async (req,res)=>{
     
     const {reseiverUserId, senderUserId,amount} = req.body;
 
-    const user = await User.findOne({where: {reseiverUserId:id, senderUserId,amount }} );
+    const user = await User.findOne({where: {
+      reseiverUserId:id ,
+      senderUserId,
+      amount
+    }} );
     
    
 
 
     res.status(201).json({
-      
+      user
         });
           } catch (error) {
          console.log(error);
@@ -47,4 +51,4 @@ const transferences = async (req,res)=>{
   }
 }
 
-  module.exports={getAnAmount,transferences}
+  module.exports={transferences}
