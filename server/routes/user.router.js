@@ -5,7 +5,8 @@ const {
   
   allTransferOfUser,
   createUser, 
-  loginUser
+  loginUser,
+  getAllUsers
   
 } = require('../controllers/user.controller');
 
@@ -16,7 +17,7 @@ const router = express.Router();
 
 router.post('/signup', createUser)
 
-
+router.get('/',getAllUsers)
 
 router.post('/login',loginUser)
 

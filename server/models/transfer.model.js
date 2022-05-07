@@ -18,7 +18,7 @@ const Transfer = db.define("transfer", {
    allowNull:false,
   },
   reseiverUserId: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   
