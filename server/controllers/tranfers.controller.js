@@ -4,24 +4,24 @@ const {Transfer}=require('../models/transfer.model');
 const { usersRouter } = require('../routes/user.router');
 
 
-// const getAnAmount = async (req, res) => {
-//     try {
+const getAnAmount = async (req, res) => {
+    try {
     
-//       const {id} =req.body; 
+      const {id} =req.body; 
       
-//       const newTransfer = await Transfer.findAll({ where:{ senderUserid:id}}); 
+      const newTransfer = await Tranfer.findAll({ where:{ senderUserid:id}}); 
       
-//       if (newTransfer === null) {
-//         console.log('Not found!');
+      if (newTransfer === null) {
+        console.log('Not found!');
   
-//       }
+      }
      
-//       res.status(201).json({
-//         newTransfer });
-//     } catch (error) {
-//       console.log(error);
-//     }
-// };
+      res.status(201).json({
+        newTransfer });
+    } catch (error) {
+      console.log(error);
+    }
+};
 
 
 
@@ -46,9 +46,9 @@ const transferences = async (req,res)=>{
       user
         });
           } catch (error) {
-         console.log(error);
+         console.log(error,"no pasa");
 
   }
 }
 
-  module.exports={transferences}
+  module.exports={getAnAmount,transferences}

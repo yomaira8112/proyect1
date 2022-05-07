@@ -48,10 +48,9 @@ const allTransferOfUser=async(req,res)=>{
     res.status(200).json({
       user,
     })
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+    } catch (error) {
+    console.log(error);   }
+   };
 
 const getAllUsers = async (req, res) => {
 	try {
