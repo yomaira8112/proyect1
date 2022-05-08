@@ -17,52 +17,52 @@ const createUser = catchAsync(async (req, res) => {
     name,
     accountNumber,
     password: hashPassword,
-  })
+  });
 
   newUser.password = undefined;
 
   res.status(201).json({
     newUser,
-  })
-})
+  });
+});
 
 const loginUser = async (req, res) => {
   try {
-    const { accountNumber,password } = req.body;
+    const { accountNumber, password } = req.body;
 
-    const user = await User.findOne({ where: {accountNumber,password  } });
+    const user = await User.findOne({ where: { accountNumber, password } });
 
     res.status(201).json({
       user,
-    })
+    });
   } catch (error) {
     console.log(error);
   }
 };
 
-const allTransferOfUser=async(req,res)=>{
+const allTransferOfUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findOne({ where: { id } });
 
     res.status(200).json({
       user,
-    })
-    } catch (error) {
-    console.log(error);   }
-   };
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const getAllUsers = async (req, res) => {
-	try {
-		const users = await User.findAll();
+  try {
+    const users = await User.findAll();
 
-		res.status(200).json({
-			users,
-		});
-	} catch (err) {
-		console.log(err);
-	}
-}
-  
+    res.status(200).json({
+      users,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-module.exports = {createUser,loginUser,allTransferOfUser,getAllUsers}
+module.exports = { createUser, loginUser, allTransferOfUser, getAllUsers };

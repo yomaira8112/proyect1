@@ -1,54 +1,37 @@
-const{User}=require('../models/user.model')
-
-const {Transfer}=require('../models/transfer.model');
-const { usersRouter } = require('../routes/user.router');
-
+const { Transfer } = require("../models/transfer.model");
+const { User, accountNumber } = require("../models/user.model");
 
 const getAnAmount = async (req, res) => {
-    try {
-    
-      const {id} =req.body; 
-      
-      const newTransfer = await Tranfer.findAll({ where:{ senderUserid:id}}); 
-      
-      if (newTransfer === null) {
-        console.log('Not found!');
-  
-      }
-     
-      res.status(201).json({
-        newTransfer });
-    } catch (error) {
-      console.log(error);
-    }
+  try {
+    const tranfers = await Transfer.findAll({
+      where: { status: "exists" },
+      include: [{ model: User }],
+    });
+    res.status(200).json({
+      tranfers,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
+const transferences = async (req, res) => {
+  try {
+    const { amount, senderUserId, reseiverUserId } = req.body;
 
-
-const transferences = async (req,res)=>{
-  
-   
-  try { 
-    
-    
-    const {reseiverUserId, senderUserId,amount} = req.body;
-
-    const user = await User.findOne({where: {
-      reseiverUserId:id ,
+    const transfer = await Transfer.create({
+      amount,
       senderUserId,
-      amount
-    }} );
-    
-   
+      reseiverUserId,
+    });
 
+    const addition = User.amount + User.amount;
+    const sustraction = User.amount - User.amount;
 
-    res.status(201).json({
-      user
-        });
-          } catch (error) {
-         console.log(error,"no pasa");
-
+    res.status(201).json({ transfer });
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
-  module.exports={getAnAmount,transferences}
+module.exports = { getAnAmount, transferences };

@@ -1,22 +1,14 @@
-const express = require('express');
+const express = require("express");
 
+const app = express();
 
+const { usersRouter } = require("./routes/user.router");
 
-const app=express()
+const { TransferRouter } = require("./routes/transfer.routes");
 
-const {usersRouter}=require('./routes/user.router')
+app.use(express.json());
+app.use("/api/v1/trasfers", TransferRouter);
 
-const {TransferRouter}=require('./routes/transfer.routes')
+app.use("/api/v1/users", usersRouter);
 
-app.use(express.json())
-app.use('/api/v1/trasfers',TransferRouter)
-
-app.use("/api/v1/users",usersRouter)
-
-
-
-
-module.exports={app}
-
-
-
+module.exports = { app };

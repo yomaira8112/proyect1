@@ -8,21 +8,24 @@ const Transfer = db.define("transfer", {
     allowNull: false,
     type: DataTypes.INTEGER,
   },
-    
+
   amount: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
   senderUserId: {
     type: DataTypes.INTEGER,
-   allowNull:false,
+    allowNull: false,
   },
   reseiverUserId: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  
-  
+
+  status: {
+    type: DataTypes.STRING,
+    defaultValue: "exists",
+  },
 });
 
 module.exports = { Transfer };

@@ -27,8 +27,8 @@ const User = db.define("user", {
   amount: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 1000
-  }
+    defaultValue: 0,
+  },
 });
 
 module.exports = { User };
